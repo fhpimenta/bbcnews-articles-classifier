@@ -1,0 +1,23 @@
+{
+    "name": "fhpimenta/bbcnews-classifier",
+    "description": "Demo of classifying BBC News Articles in PHP",
+    "type": "project",
+    "require": {
+        "league/pipeline": "^1.0",
+        "php-ai/php-ml": "^0.6.2",
+        "symfony/console": "^4.1",
+        "fabpot/goutte": "^3.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "BBCNewsClassifier\\": "src/"
+        }
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Felipe Pimenta",
+            "email": "fhpimenta12@gmail.com"
+        }
+    ]
+}
