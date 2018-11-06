@@ -1,7 +1,6 @@
 <?php
 
-namespace BBCNewsClassifier\Classes;
-
+namespace BBCNewsClassifier\Stages;
 
 use League\Pipeline\StageInterface;
 use Phpml\Classification\NaiveBayes;
@@ -37,7 +36,7 @@ class Classify implements StageInterface
         $this->tfIdTransformer->transform($samples);
 
         $dataset = new ArrayDataset($samples, $dataset->getTargets());
-        $randomSplit = new StratifiedRandomSplit($dataset, 0.1);
+        $randomSplit = new StratifiedRandomSplit($dataset, 0.5);
         $this->classifier = new NaiveBayes();
         $this->classifier->train($randomSplit->getTrainSamples(), $randomSplit->getTrainLabels());
     }
@@ -50,7 +49,6 @@ class Classify implements StageInterface
         $this->tfIdTransformer->transform($newSample);
 
         $category = $this->classifier->predict($newSample)[0];
-
         return $category;
     }
 }

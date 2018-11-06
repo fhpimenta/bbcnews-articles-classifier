@@ -1,6 +1,6 @@
 <?php
 
-namespace BBCNewsClassifier\Classes;
+namespace BBCNewsClassifier\Stages;
 
 use Goutte\Client;
 use League\Pipeline\StageInterface;
@@ -25,6 +25,5 @@ class Extract implements StageInterface
         $body = implode("",$body);
 
         return $title.$body;
-
     }
 }

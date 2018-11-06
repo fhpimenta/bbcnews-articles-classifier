@@ -1,10 +1,9 @@
 <?php
 
-namespace BBCNewsClassifier\Command;
+namespace BBCNewsClassifier\Commands;
 
-
-use BBCNewsClassifier\Classes\Classify;
-use BBCNewsClassifier\Classes\Extract;
+use BBCNewsClassifier\Stages\Classify;
+use BBCNewsClassifier\Stages\Extract;
 use League\Pipeline\Pipeline;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -25,7 +24,7 @@ class Classification extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $url = $input->getArgument('url');
-        $message = new SymfonyStyle($input, $output);
+        $style = new SymfonyStyle($input, $output);
 
         $pipeline = (new Pipeline)
                     ->pipe(new Extract)
@@ -33,13 +32,9 @@ class Classification extends Command
 
         try {
             $response = $pipeline->process($url);
-            $message->success("Classification is ". $response);
+            $output->writeln('Category: ' . $response);
         } catch (\Exception $e) {
-            $message->error($e->getMessage());
+            $style->error($e->getMessage());
         }
-
-
-
-
     }
 }
